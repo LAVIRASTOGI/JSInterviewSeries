@@ -1,0 +1,219 @@
+closures---
+
+QUES-1
+A closure is an inner function that has access to the outer function's variables and parameters. It allows the inner function to access and manipulate the outer function's variables, even after the outer function has returned.
+(inner func creates a refrence of the outer parent func who has created it(lexical env) so it has access to variables) 
+the lexical scope is the scope of a variable or function based on where it is defined in the source code
+
+
+closure-- local scope -----lexical scope ----global scope
+
+
+function outer() {
+
+  var x = 10;
+  function inner() {
+    //x:10
+  var y = 5;
+  console.log(x + y);
+
+  }
+  
+  return inner;
+  
+  }
+  
+  var innerFunc = outer();
+  
+  innerFunc();  //15
+
+
+
+
+
+
+function makeAdder(x) {
+//x:5
+    return function (y) {
+       //x:5
+      return x + y;
+    };
+  }
+  
+  const add5 = makeAdder(5);//x:5
+  const add10 = makeAdder(10);//x:10
+  
+  console.log(add5(2)); //7
+  console.log(add10(2)); //12
+
+
+
+
+
+QUES-2
+Closure Scope Chain
+Every closure has three scopes:
+
+Local Scope (Own scope)
+Outer Functions Scope
+Global Scope
+
+
+
+
+
+
+QUES-3
+Advantages of closures--
+
+1.Encapsulation--
+refers to the practice of hiding the internal details of an object and exposing only the necessary information to the outside world.
+
+
+example--
+
+function BankAccount(accountNumber, accountHolderName, balance) {
+    let _accountNumber = accountNumber;
+    let _accountHolderName = accountHolderName;
+    let _balance = balance;
+  
+    function showAccountDetails() {
+        console.log(`Account Number: ${_accountNumber}`);
+        console.log(`Account Holder Name: ${_accountHolderName}`);
+        console.log(`Balance: ${_balance}`);
+    }
+  
+    function deposit(amount) {
+        _balance += amount;
+        showAccountDetails();
+    }
+  
+    return deposit
+  }
+  
+  let myBankAccountDeposit = BankAccount("123456", "Lavi", 500);
+  
+  myBankAccountDeposit(500); 
+
+  2. Function Currying
+  
+  function add (a) {
+  return function (b) {
+    return a + b;
+  }
+}
+3.Memoization
+Memoization is the programmatic practice of making long recursive/iterative functions run much faster. Closures are used here as well.
+
+
+4.Async func/ eventhandling /setTimeout
+
+5.var funcExecuted = (function() {
+    var executed = 1;
+    return function() {
+        executed ++;
+        console.log(executed);
+    };
+})();
+funcExecuted(); //2
+funcExecuted(); //3
+
+QUES-4
+disadvantages
+1.Closures prevent variables inside functions from being released by memory i.e. as long as the closure is active, the memory can’t be garbage collected. which affects performance.solution--remove local variables which will make closure as null
+
+
+
+QUES-5
+Can you explain the difference between a Closure and a nested function?
+
+QUES-6 How is state maintained in a Closure?
+ques-7
+Can you explain how Closures work with variable scope in JavaScript?
+
+A closure in programming is a function that has access to its own scope, the outer function’s scope, and the global scope. so closures have three scopes: local scope , outer function’s scope, and global scope. When a closure is created, it retains access to the outer function’s variable environment, thus maintaining state.
+let explain with example
+function counter() {
+    var count = 1;
+    return function() {
+        count ++;
+        console.log(count);
+    };
+};
+let counterFunc=counter()
+counterFunc(); //2
+counterFunc(); //3
+
+ques-8
+Can you provide an example of a practical use of a Closure?
+
+var funcExecuted = (function() {
+    var executed = 1;
+    return function() {
+        executed ++;
+        console.log(executed);
+    };
+})();
+funcExecuted(); //2
+funcExecuted(); //3
+
+//counter 
+
+ques-9
+How can Closures be used to control access to a variable? 
+(Encapsulation ex)
+
+ques-10
+Can you explain how Closures can lead to memory leaks and how to prevent this?
+Closures prevent variables inside functions from being released by memory i.e. as long as the closure is active, the memory can’t be garbage collected. which affects performance.solution--remove local variables which will make closure as null
+
+
+ques-11
+Can you explain the concept of Closure in the context of functional programming?
+
+
+
+ques -12
+Are all functions in js closures
+
+A closure is a function that remembers its outer variables and can access them. In JavaScript, all functions are naturally closures (there is only one exception, to be covered in The "new Function" syntax).
+
+
+In JavaScript, closures are created every time a function is created, at function creation time.
+That is: they automatically remember where they were created using a hidden [[Environment]] property, and then their code can access outer variables.
+
+
+The "new Function" 
+
+let sum = new Function('a', 'b', 'return a + b');
+Usually, a function remembers where it was born in the special property [[Environment]]. It references the Lexical Environment from where it’s created.
+But when a function is created using new Function, its [[Environment]] is set to reference not the current Lexical Environment, but the global one.
+3
+ques-10
+- Do you understand the closure?
+- Yes!
+- Write a function, that does this next:
+
+
+function hof(a,b,c){
+ return function(c,d){
+    return a+b+c+d+e
+ }
+} 
+
+console.log(hof(2, 3, 4)(5, 6)); // 20
+
+function hof(a,b){
+ return function(c){
+     return function(d,e){
+    return a+b+c+d+e
+ }
+ }
+} 
+console.log(hof(4, 5)(6)(7, 8)); // 30
+
+
+// rest on you .All the best
+console.log(hof(3, 4)(5, 6)(7)); // 25
+
+console.log(hof(5)(6)(7)(8)(9)); // 35
