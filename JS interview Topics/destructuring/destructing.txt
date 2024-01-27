@@ -1,0 +1,94 @@
+The destructuring assignment syntax is a JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables.
+
+examples ---
+
+1.let arr = [10, 20];
+
+let [a,b]=arr
+
+console.log(a,b) //10 ,20
+
+
+
+
+
+2.const obj = { a1: 1, b1: 2 };
+
+const { a1, b1 } = obj;
+
+console.log(a1,b1)//1,2
+
+array destructuring
+
+ex--
+swaping of variables
+let a=12;
+let b=10;
+
+[b,a]=[a,b]
+
+console.log(a,b)
+
+
+array destructing--
+
+
+let newarr=[10,undefined,30];
+let [a,b]=newarr;
+console.log(a,b);
+
+
+// we can define a default value if no value there
+
+
+let [,b1=33,c1=99,d1=444]=newarr;
+console.log(b1,c1,d1);  // 33 30 444
+
+nested array destructuring
+ex ----
+let arr=[1,2,3,[4,,6],7]
+
+let [a,b,,[c,d=23,e]]=arr
+
+console.log(a,b,c,d,e); //1 2 4 23 6
+
+
+Object destructing
+
+
+//Object destructing
+
+
+let obj={firstname:'lavi',lname:'rastogi',id:897};
+
+
+let {firstname,lname}=obj;
+console.log(firstname,lname) //lavi rastogi
+
+
+// we can provide other names also in destructing and use
+let{firstname:fname1,lname:lname2}=obj;
+console.log(fname1,lname2)
+
+
+
+
+//  we provided defalut values and also names and which obj property will be undefined or empty we will use the deafult value
+let{firstname:fname2='chhabiv',lname:lname23='ddddddd333',middlename='dd'}=obj;
+console.log(fname2,lname23,middlename)
+
+
+//lavi rastogi dd
+
+nested object destructuring
+
+let employee = {
+  id: 1001,
+  name: {
+      firstName: 'John',
+      lastName: 'Doe'
+  }
+};
+
+let {name:{firstName}}=employee
+console.log(firstName) //john
