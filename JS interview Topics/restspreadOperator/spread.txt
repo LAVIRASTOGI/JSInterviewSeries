@@ -1,0 +1,16 @@
+Spread operators allow us to expand an array or object into its individual elements,
+
+let arr=[1,2,3]
+
+let arr1=[...arr,5]
+console.log(arr1) //[1,2,3,4,5]
+
+let obj={name:'lavi',age:30}
+
+let obj2={...obj};
+obj2.name='yashu'
+console.log(obj2) //{ name: 'yashu', age: 30 }
+console.log(obj) //{ name: 'lavi', age: 30 }
+
+
+

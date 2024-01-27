@@ -1,0 +1,15 @@
+ REST Operator
+
+REST operator is shown by (...dots) . It allows to represent any number of arguments as a array (packs all arguments in a array)
+rest operators allow us to condense multiple elements into a single array 
+
+In functions when we require to pass arguments but were not sure how many we have to pass, the rest parameter makes it easier
+
+Rest operators are last in paramters list
+
+function sum(a,...args){
+  // //print sum
+    console.log(args)
+}
+sum(3,4)
+sum(3,4,5,5)
